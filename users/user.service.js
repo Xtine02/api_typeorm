@@ -1,4 +1,4 @@
-const bcrypt = require(bcrypt.js);
+const bcrypt = require('bcryptjs');
 const db = require('_helpers/db');
 
 module.exports = {
@@ -20,7 +20,7 @@ async function getById(id) {
 async function create(params) {
 
     if (await db.User.findOne({ where: {email: params.email } })) {
-        throw 'Email "' + params.emal + '" is already registered';
+        throw 'Email "' + params.email + '" is already registered';
     }
 
 const user = new db.User(params);

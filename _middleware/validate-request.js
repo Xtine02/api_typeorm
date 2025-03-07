@@ -1,16 +1,16 @@
-module.exports = validateRequests;
+module.exports = validateRequest;
 
-function validateRequest(requestAnimationFrame, nextTick, schema) {
+function validateRequest(req, next, schema) {
     const options = {
         abortEarly: false,
         allowUnknownn: true,
         stripUnknown: true
     };
-    const { error, value } = schema.validate(requestAnimationFrame.body, options);
+    const { error, value } = schema.validate(req.body, options);
     if (error) {
         next(`Validation error: ${error.details.map(x => x.message).join(', ')}`);
     } else {
-        requestAnimationFrame.body = value;
+        req.body = value;
         next();
     }
 
